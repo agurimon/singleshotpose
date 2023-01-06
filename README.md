@@ -29,6 +29,12 @@ SingleShotPose is released under the MIT License (refer to the LICENSE file for 
 
 The code is tested on **Windows** with CUDA v8 and cudNN v5.1. The implementation is based on **PyTorch 0.4.1** and tested on **Python3.6**. The code requires the following dependencies that could be installed with conda or pip: numpy, scipy, PIL, opencv-python. For an earlier version that is compatible with PyTorch 0.3.1 and tested on Python2.7, please see ```py2``` folder.
 
+```
+conda create -n singleshotpose python=3.8
+conda activate singleshotpose
+conda install pytorch torchvision torchaudio pytorch-cuda=11.6 -c pytorch -c nvidia
+pip install numpy scipy Pillow six opencv-python
+```
 #### Downloading and preparing the data
 
 Inside the main code directory, run the following to download and extract (1) the preprocessed LINEMOD dataset, (2) trained models for the LINEMOD dataset, (3) the trained model for the OCCLUSION dataset, (4) background images from the VOC2012 dataset respectively.
