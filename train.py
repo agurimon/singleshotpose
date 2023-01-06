@@ -187,15 +187,15 @@ def test(epoch, niter):
                 box_gt.append(truths[k][0])
                    
                 # Denormalize the corner predictions 
-                corners2D_gt = np.array(np.reshape(box_gt[:num_keypoints*2], [num_keypoints, 2]), dtype='float32')
-                corners2D_pr = np.array(np.reshape(box_pr[:num_keypoints*2], [num_keypoints, 2]), dtype='float32')
+                corners2D_gt = torch.stack(box_gt[:num_keypoints*2], dim=0).reshape(num_keypoints, 2)
+                corners2D_pr = torch.stack(box_pr[:num_keypoints*2], dim=0).reshape(num_keypoints, 2)
                 corners2D_gt[:, 0] = corners2D_gt[:, 0] * im_width
                 corners2D_gt[:, 1] = corners2D_gt[:, 1] * im_height               
                 corners2D_pr[:, 0] = corners2D_pr[:, 0] * im_width
                 corners2D_pr[:, 1] = corners2D_pr[:, 1] * im_height
 
                 # Compute corner prediction error
-                corner_norm = np.linalg.norm(corners2D_gt - corners2D_pr, axis=1)
+                corner_norm = np.linalg.norm(corners2D_gt.cpu() - corners2D_pr, axis=1)
                 corner_dist = np.mean(corner_norm)
                 errs_corner2D.append(corner_dist)
 
